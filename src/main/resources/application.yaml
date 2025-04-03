@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: esb-service
+
+logging:
+  level:
+    org.springframework.web: TRACE
+    com.utd.it.soa: DEBUG
+
+server:
+  port: 9090
