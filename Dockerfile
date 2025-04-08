@@ -1,22 +1,22 @@
-#Etapa 1: Compilar con maven
-FROM maven:3.9.6-eclipse-temurin-17 AS builder
+# Etapa 1: Compilación con Maven y JDK 17
+FROM maven:3.9.6-eclipse-temurin-17 as builder
 
 WORKDIR /app
 
-#Copiar archivos del proyecto y compilar
 COPY pom.xml .
-
 COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-FROM openjdk:8-jdk-alpine                                                                                                                                                                                                                                                                                                                                                          
+# Etapa 2: Imagen final ligera con JRE 17
+FROM eclipse-temurin:17-jre-alpine
 
-# Establecer el directorio de trabajo dentro del contenedor
+ENV JAVA_OPTS="-Xmx512m -Xms128m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+
 WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
 
-EXPOSE 9090
+EXPOSE 8080
 
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
