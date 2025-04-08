@@ -28,8 +28,14 @@ import reactor.core.publisher.Mono;
 public class ESBController {
 
         // Correcta inicialización de WebClient
-        private final WebClient webClient = WebClient.create("USERS_SERVICE_URL");
+        private final WebClient webClient = WebClient.create("http://ec-users-production.up.railway.app");
         private final Auth auth = new Auth();
+
+        // Endpoint para la ruta raíz
+        @GetMapping("/")
+        public ResponseEntity<String> home() {
+                return ResponseEntity.ok("ESB Service is running!");
+        }
 
         @PostMapping("/create")
         public ResponseEntity<String> createUser(@RequestBody User user) {
