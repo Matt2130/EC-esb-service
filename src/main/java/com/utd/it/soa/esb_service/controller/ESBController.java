@@ -45,7 +45,8 @@ public class ESBController {
 
                 // Enviar la petición correctamente con Content-Type JSON
                 String response = webClient.post()
-                                .uri("http://users-ecommerce:5000/api/users/create")
+                                .uri("http://ec-users-production.up.railway.app:5000/api/users/create")
+                                /* .uri("http://users-ecommerce:5000/api/users/create") */
                                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                                 .bodyValue(user)
                                 .retrieve()
@@ -66,7 +67,8 @@ public class ESBController {
 
                 // Realizar la petición GET con el token
                 String response = webClient.get()
-                                .uri("http://users-ecommerce:5000/api/users/all")
+                                .uri("http://ec-users-production.up.railway.app:5000/api/users/all")
+                                /* .uri("http://users-ecommerce:5000/api/users/all") */
                                 .header(HttpHeaders.AUTHORIZATION, token)
                                 .retrieve()
                                 .bodyToMono(String.class)
@@ -89,7 +91,8 @@ public class ESBController {
 
                 // Realizar la petición PUT con el token
                 String response = webClient.put()
-                                .uri("http://users-ecommerce:5000/api/users/update/" + id)
+                                .uri("http://ec-users-production.up.railway.app:5000/api/users/update/" + id)
+                                /* .uri("http://users-ecommerce:5000/api/users/update/" + id) */
                                 .header(HttpHeaders.AUTHORIZATION, token)
                                 .bodyValue(user)
                                 .retrieve()
@@ -112,7 +115,8 @@ public class ESBController {
 
                 // Realizar la petición PATCH con el token
                 String response = webClient.patch()
-                                .uri("http://users-ecommerce:5000/api/users/remove/" + id) // localhost:4000
+                                .uri("http://ec-users-production.up.railway.app:5000/api/users/remove/" + id)
+                                /* .uri("http://users-ecommerce:5000/api/users/remove/" + id) */
                                 .header(HttpHeaders.AUTHORIZATION, token)
                                 .retrieve()
                                 .bodyToMono(String.class)
@@ -127,7 +131,8 @@ public class ESBController {
                 System.out.println("Enviando solicitud a Node.js con usuario: " + user.getUsername());
 
                 return webClient.post()
-                                .uri("http://users-ecommerce:5000/api/users/login")
+                                .uri("http://ec-users-production.up.railway.app:5000/api/users/login")
+                                /* .uri("http://users-ecommerce:5000/api/users/login") */
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(user)
                                 .retrieve()
@@ -153,7 +158,8 @@ public class ESBController {
                 System.out.println("Solicitud de cambio de contraseña con token: " + token);
 
                 return webClient.post()
-                                .uri("http://users-ecommerce:5000/api/users/newpassword/" + token)
+                                .uri("http://ec-users-production.up.railway.app:5000/api/users/newpassword/" + token)
+                                /* .uri("http://users-ecommerce:5000/api/users/newpassword/" + token) */
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(requestBody)
                                 .retrieve()
