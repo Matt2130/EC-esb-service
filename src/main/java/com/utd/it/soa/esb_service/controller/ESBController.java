@@ -32,16 +32,8 @@ public class ESBController {
         private final Auth auth = new Auth();
 
         @PostMapping("/create")
-        public ResponseEntity<String> createUser(@RequestBody User user,
-                        @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        public ResponseEntity<String> createUser(@RequestBody User user) {
                 System.out.println("Request Body: " + user);
-                System.out.println("Token recibido: " + token);
-
-                // Validar el token
-                if (!auth.validateToken(token)) {
-                        return ResponseEntity.status(400)
-                                        .body("Token inválido o expirado");
-                }
 
                 // Enviar la petición correctamente con Content-Type JSON
                 String response = webClient.post()
