@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
 public class ESBController {
 
         // Correcta inicialización de WebClient
-        private final WebClient webClient = WebClient.create("https://ec-users-production.up.railway.app/api/users");
+        private final WebClient webClient = WebClient.create("http://ec-users-production.up.railway.app/api/users");
         private final Auth auth = new Auth();
 
         @PostMapping("/create")
