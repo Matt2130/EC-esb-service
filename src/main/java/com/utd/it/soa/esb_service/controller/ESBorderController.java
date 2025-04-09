@@ -66,6 +66,9 @@ public class ESBorderController {
         if (order.getPaymentStatus() != null) {
             allowedFields.put("paymentStatus", order.getPaymentStatus());
         }
+        if (order.getPaymentMethod() != null) {
+            allowedFields.put("paymentMethod", order.getPaymentMethod());
+        }
         if (order.getDeliveryDate() != null) {
             allowedFields.put("deliveryDate", order.getDeliveryDate().toString()); // Convertir LocalDate a String
         }
