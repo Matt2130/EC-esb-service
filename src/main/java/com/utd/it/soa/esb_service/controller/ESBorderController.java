@@ -15,7 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequestMapping("/api/v1/esb")
 public class ESBorderController {
 
-    private final WebClient webClient = WebClient.create();
+    private final WebClient webClient = WebClient.create("https://ec-orders-production.up.railway.app");
     private final AuthOrder auth = new AuthOrder();
 
     @PostMapping("/orders/create")
@@ -26,7 +26,7 @@ public class ESBorderController {
         }
 
         String response = webClient.post()
-                .uri("http://orders-ecommerce:5000/api/orders/create")
+                .uri("/api/orders/create")
                 .header(HttpHeaders.CONTENT_TYPE, "application/json")
                 .bodyValue(order)
                 .retrieve()
@@ -43,7 +43,7 @@ public class ESBorderController {
         }
 
         String response = webClient.get()
-                .uri("http://orders-ecommerce:5000/api/orders/all")
+                .uri("/api/orders/all")
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
@@ -77,7 +77,7 @@ public class ESBorderController {
         System.out.println("Datos enviados a Orders Service: " + allowedFields); // Debugging
 
         String response = webClient.put()
-                .uri("http://orders-ecommerce:5000/api/orders/update/" + id)
+                .uri("/api/orders/update/" + id)
                 .bodyValue(allowedFields) // Enviar solo los campos permitidos
                 .retrieve()
                 .bodyToMono(String.class)
@@ -94,7 +94,7 @@ public class ESBorderController {
         }
 
         String response = webClient.patch()
-                .uri("http://orders-ecommerce:5000/api/orders/remove/" + id)
+                .uri("/api/orders/remove/" + id)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();

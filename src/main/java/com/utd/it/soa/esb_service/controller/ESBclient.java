@@ -23,7 +23,7 @@ public class ESBclient {
             @RequestBody Client client) {
         if (authClient.validateToken(token)) {
             String response = webClientBuilder.build().post()
-                    .uri("http://clients-ecommerce:5000/api/clients/create")
+                    .uri("https://ec-clients-production.up.railway.app/api/clients/create")
                     .header("Authorization", token)
                     .bodyValue(client)
                     .retrieve()
@@ -47,7 +47,7 @@ public class ESBclient {
 
         // Realizar la petición GET con el token
         String response = webClientBuilder.build().get()
-                .uri("http://clients-ecommerce:5000/api/clients/all")
+                .uri("https://ec-clients-production.up.railway.app/api/clients/all")
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .retrieve()
                 .bodyToMono(String.class)
@@ -62,7 +62,7 @@ public class ESBclient {
             @RequestBody Client client) {
         if (authClient.validateToken(token)) {
             String response = webClientBuilder.build().put()
-                    .uri("http://clients-ecommerce:5000/api/clients/update/" + id)
+                    .uri("https://ec-clients-production.up.railway.app/api/clients/update/" + id)
                     .header("Authorization", token)
                     .bodyValue(client)
                     .retrieve()
@@ -88,7 +88,7 @@ public class ESBclient {
 
         // Realizar la petición PATCH con el token
         String response = webClientBuilder.build().patch()
-                .uri("http://clients-ecommerce:5000/api/clients/remove/" + id)
+                .uri("https://ec-clients-production.up.railway.app/api/clients/remove/" + id)
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .header("Content-Type", "application/json")
                 .retrieve()

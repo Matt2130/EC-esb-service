@@ -15,7 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequestMapping("/api/v1/esb")
 public class ESBproductController {
 
-    private final WebClient webClient = WebClient.create();
+    private final WebClient webClient = WebClient.create("https://ec-product-production.up.railway.app");
     private final AuthProduct auth = new AuthProduct();
 
     @PostMapping("/product/create")
@@ -26,7 +26,7 @@ public class ESBproductController {
         }
 
         String response = webClient.post()
-                .uri("http://product-ecommerce:5000/api/product/create")
+                .uri("/api/product/create")
                 .header(HttpHeaders.CONTENT_TYPE, "application/json")
                 .bodyValue(product)
                 .retrieve()
@@ -43,7 +43,7 @@ public class ESBproductController {
         }
 
         String response = webClient.get()
-                .uri("http://product-ecommerce:5000/api/product/all")
+                .uri("/api/product/all")
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
@@ -79,7 +79,7 @@ public class ESBproductController {
         System.out.println("Datos enviados a Product Service: " + allowedFields); // Debugging
 
         String response = webClient.put()
-                .uri("http://product-ecommerce:5000/api/product/update/" + id)
+                .uri("/api/product/update/" + id)
                 .bodyValue(allowedFields) // Enviar solo los campos permitidos
                 .retrieve()
                 .bodyToMono(String.class)
@@ -96,7 +96,7 @@ public class ESBproductController {
         }
 
         String response = webClient.patch()
-                .uri("http://product-ecommerce:5000/api/product/remove/" + id)
+                .uri("/api/product/remove/" + id)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
